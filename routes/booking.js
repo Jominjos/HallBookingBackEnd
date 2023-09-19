@@ -4,6 +4,6 @@ const router = express.Router();
 
 router.get("/", bookingController.get);
 
-router.post("/");
+router.post("/", bookingController.post);
 
 module.exports = router;

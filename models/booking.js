@@ -2,21 +2,21 @@ const mongoose = require("mongoose");
 
 // Define a schema for the booking
 const bookingSchema = new mongoose.Schema({
-  hall: {
+  hallId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "halls", // Reference to the Room model
     required: true,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User", // Reference to the User model
+    ref: "users", // Reference to the User model
     required: true,
   },
-  startTime: {
+  startDate: {
     type: Date,
     required: true,
   },
-  endTime: {
+  endDate: {
     type: Date,
     required: true,
   },
