@@ -5,7 +5,10 @@ const hallSchema = new mongoose.Schema({
     required: true,
     type: String,
   },
-
+  hallId: {
+    required: [true, "hall ID is mandatory"],
+    type: String,
+  },
   capacity: {
     required: true,
     type: Number,

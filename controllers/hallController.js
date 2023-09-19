@@ -1,22 +1,21 @@
 const Hall = require("../models/hall");
 
 module.exports = {
-  get: (req, res) => {
-    fetchUser();
-    async function fetchUser() {
+  get: async (req, res) => {
+    try {
       const dbdata = await Hall.find({});
       console.log(dbdata);
       res.json(dbdata);
+    } catch (error) {
+      res.json({ message: "error " });
     }
   },
 
-  post: (req, res) => {
+  post: async (req, res) => {
     let halldetail = req.body;
-    addHall();
-    async function addHall() {
-      const dbdata = await Hall.create(halldetail);
-      console.log(dbdata);
-      res.json(dbdata);
-    }
+
+    const dbdata = await Hall.create(halldetail);
+    console.log(dbdata);
+    res.json(dbdata);
   },
 };
