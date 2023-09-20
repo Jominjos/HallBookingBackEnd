@@ -2,7 +2,7 @@ const User = require("../models/user");
 
 module.exports = {
   get: async (req, res) => {
-    const dbdata = await User.find({});
+    const dbdata = await User.find({}).populate("Bookings");
     res.json(dbdata);
   },
 

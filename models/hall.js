@@ -21,6 +21,12 @@ const hallSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  Bookings: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Booking",
+    },
+  ],
 });
 
 module.exports = mongoose.model("halls", hallSchema);

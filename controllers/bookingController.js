@@ -8,12 +8,12 @@ module.exports = {
   },
   post: async (req, res) => {
     const bookingData = req.body;
-    const userId = await User.find({ username: bookingData.user }, { _id: 1 });
+    const userId = await User.find({ username: bookingData.user });
     const userid = userId[0]._id;
     const roomId = await Hall.find({ hallId: bookingData.hallId }, { _id: 1 });
     const roomid = roomId[0]._id;
-    console.log(roomid);
 
+    const bookings = await Booking.find({ hallId: roomid });
     const bookingdata = {
       hallId: roomid,
       user: userid,
@@ -21,7 +21,13 @@ module.exports = {
       endDate: bookingData.endDate,
     };
 
-    const dbdata = await Booking.create(bookingdata);
-    res.json(dbdata);
+    const createdData = await Booking.create(bookingdata);
+    const bookdata = createdData._id;
+    await Hall.updateOne({ _id: roomId[0] }, { $push: { Bookings: bookdata } });
+    await User.updateOne({ _id: userId[0] }, { $push: { Bookings: bookdata } });
+
+    //console.log(pushing);
+    //console.log(pushToUser);
+    res.json(createdData);
   },
 };

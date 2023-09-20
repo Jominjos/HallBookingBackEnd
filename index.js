@@ -21,6 +21,6 @@ async function main() {
   app.use("/book", BookingRouter);
 }
 
-app.listen(4001, () => {
+app.listen(process.env.PORT_NUMBER || 4001, () => {
   console.log(`server is listening on port 4001`);
 });
