@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const app = express();
 const bodyparser = require("body-parser");
 const dotenv = require("dotenv");
-app.use(bodyparser.json());
+const cors = require("cors");
+
 dotenv.config({ path: "./config.env" });
 const Hall = require("./models/hall");
 app.use(bodyparser.urlencoded({ extended: true }));
@@ -11,6 +12,12 @@ app.use(bodyparser.json());
 const UserRouter = require("./routes/Users");
 const HallRouter = require("./routes/hall");
 const BookingRouter = require("./routes/booking");
+
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 main().catch((err) => console.log(err));
 async function main() {
